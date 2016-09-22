@@ -17,7 +17,7 @@ function searchPeople() {
   $.ajax({
     type: 'GET',
     url: '/peoples/search.js',
-    data: `search_terms=${terms}`
+    data: "search_terms=" + terms
   });
 };
 
