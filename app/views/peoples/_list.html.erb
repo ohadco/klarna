@@ -1,0 +1,25 @@
+<% @peoples ||= peoples %>
+<div class="cui__selector--direct title">
+
+  <h2 class="cui__selector--direct__title">
+    Search results
+  </h2>
+  <% if @peoples.blank? || @peoples.size == 0 %>
+    No results, please review your search or try a different one
+  <% else %>
+    <% @peoples.each do |people| %>
+      <div class="cui__selector--direct__item">
+        <!-- <img class="user-avatar" src="<%= people.avatar %>" /> -->
+        <%= image_tag 'avatar.png', class:'user-avatar' %>
+
+        <div class="cui__selector--direct__label">
+          <%= people.name %> (<%= people.phone %>)
+        </div>
+
+        <p class="cui__selector--direct__description">
+          <%= people.address %>
+        </p>
+      </div>
+    <% end %>
+  <% end %>
+</div>
