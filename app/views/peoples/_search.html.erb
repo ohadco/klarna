@@ -1,15 +1,14 @@
-<% @peoples ||= peoples %>
 <div class="cui__selector--direct title">
-
-  <h2 class="cui__selector--direct__title">
-    Search results
-  </h2>
   <% if @peoples.blank? || @peoples.size == 0 %>
-    No results, please review your search or try a different one
+    <h2 class="cui__selector--direct__title">
+      No results, please review your search or try a different one
+    </h2>
   <% else %>
+    <h2 class="cui__selector--direct__title">
+      Search results
+    </h2>
     <% @peoples.each do |people| %>
       <div class="cui__selector--direct__item">
-        <!-- <img class="user-avatar" src="<%= people.avatar %>" /> -->
         <%= image_tag 'avatar.png', class:'user-avatar' %>
 
         <div class="cui__selector--direct__label">
@@ -20,6 +19,10 @@
           <%= people.address %>
         </p>
       </div>
+    <% end %>
+    <% if @peoples.size == People::MAX_AMOUNT_TO_SHOW %>
+      <br>
+      More people found - please expand your search terms to see them
     <% end %>
   <% end %>
 </div>

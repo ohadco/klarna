@@ -1,0 +1,4 @@
+<% peoples_html = escape_javascript(
+  render(partial: 'peoples/search')
+) %>
+$("#people_list").html("<%= peoples_html %>");
