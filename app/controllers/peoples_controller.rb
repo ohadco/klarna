@@ -9,7 +9,7 @@ class PeoplesController < ApplicationController
     terms = params[:search_terms]
 
     # redirect to root in case of missing terms
-    redirect_to root_path and return if terms.blank?
+    redirect_to root_path && return if terms.blank?
 
     # extract the terms to an array
     # delete('-') because phones are saved without '-' (numbers only)
@@ -26,29 +26,31 @@ class PeoplesController < ApplicationController
     # renders 'search.js'
   end
 
-private
+  private
 
   # returns the first term that will match the age pattern
   # assuming age is between 1 to 120
-  def age_param (terms_array)
+  def age_param(terms_array)
     terms_array.each do |term|
-      return term.to_i if term.to_i.between?(1,120)
+      return term.to_i if term.to_i.between?(1, 120)
     end
-    return nil
+    nil
   end
 
   # returns the first term that will match the phone pattern
-  def phone_param (terms_array)
+  def phone_param(terms_array)
     terms_array.each do |term|
-      return term if term.to_i>120
+      return term if term.to_i > 120
     end
-    return nil
+    nil
   end
-  def name_param_array (terms)
+
+  def name_param_array(terms)
 
     # extract all char, dot, spaces from the string
     # "squish" the string (leaves only one space in case of multiple spaces)
-    # this also allows using "John 33 smith" as search term - will return "john smith"
+    # this also allows using "John 33 smith" as \
+    # search term - will return "john smith"
     terms.scan(/[[:alpha:]]|\.|[[:space:]]/).join.squish.split(' ')
   end
 end
