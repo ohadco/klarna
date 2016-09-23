@@ -1,5 +1,5 @@
 <div class="cui__selector--direct title">
-  <% if @peoples.blank? || @peoples.size == 0 %>
+  <% if peoples.blank? || peoples.size == 0 %>
     <h2 class="cui__selector--direct__title">
       No results, please review your search or try a different one
     </h2>
@@ -7,7 +7,7 @@
     <h2 class="cui__selector--direct__title">
       Search results
     </h2>
-    <% @peoples.each do |people| %>
+    <% peoples.each do |people| %>
       <div class="cui__selector--direct__item">
         <%= image_tag 'avatar.png', class:'user-avatar' %>
 
@@ -22,7 +22,7 @@
         </p>
       </div>
     <% end %>
-    <% if @peoples.size == People::MAX_AMOUNT_TO_SHOW %>
+    <% if peoples.size == People::MAX_AMOUNT_TO_SHOW %>
       <br>
       More people found - please expand your search terms to see them
     <% end %>

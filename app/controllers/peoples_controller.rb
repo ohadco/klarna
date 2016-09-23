@@ -20,24 +20,8 @@ class PeoplesController < ApplicationController
     phone = phone_param(terms_array)
     names_array = name_param_array(terms)
 
-    # add scopes only if the specific terms exists
-    @peoples = People.order(:id)
-    @peoples = @peoples.with_phone(phone) if phone.present?
-    @peoples = @peoples.of_age(age) if age.present?
-
-    # this allows searching names from any place in the query:
-    # for an example "smith 33 jons dr." will be able to find "Dr. John Smith"
-    if names_array.size > 0
-      names_array.each do |name|
-        @peoples = @peoples.with_name(name)
-      end
-    end
-
-    # [TODO] - the next comment line will allow "show more" logic
-    # @peoples = @peoples.after_id(params[:after_id]) if params[:after_id].present?
-
-    # limits the amount of people to show in the query
-    @peoples = @peoples.limit(People::MAX_AMOUNT_TO_SHOW)
+    # find the people available for the search terms
+    @peoples = People.search_by_terms(names_array, phone, age)
 
     # renders 'search.js'
   end

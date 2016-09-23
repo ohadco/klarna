@@ -1,4 +1,4 @@
 <% peoples_html = escape_javascript(
-  render(partial: 'peoples/search')
+  render(partial: 'peoples/search', :locals => { :peoples => @peoples })
 ) %>
 $("#people_list").html("<%= peoples_html %>");
